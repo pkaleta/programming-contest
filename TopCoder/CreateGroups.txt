@@ -1,0 +1,100 @@
+PROBLEM STATEMENT
+Your language school is starting a new semester, and each student must select a time schedule.  You are given a vector <int> groups, where the i-th element is the number of students who selected the i-th schedule.  Your school has a rule stating that the number of students assigned to each schedule must be between minSize and maxSize, inclusive.  However, this rule was not enforced properly during the sign up phase.  It is your job to reassign students in such a way that the rule is satisfied.  A reassignment is defined as removing a student from one time schedule and placing him in a different time schedule.  Return the minimal number of students you must reassign, or return -1 if it is impossible to satisfy the rule.  Note that you may not create new schedules or delete existing schedules.
+
+DEFINITION
+Class:CreateGroups
+Method:minChanges
+Parameters:vector <int>, int, int
+Returns:int
+Method signature:int minChanges(vector <int> groups, int minSize, int maxSize)
+
+
+CONSTRAINTS
+-groups will contain between 1 and 50 elements, inclusive.
+-Each element of groups will be between 1 and 1,000,000, inclusive.
+-maxSize will be between 1 and 1,000,000, inclusive.
+-minSize will be between 1 and maxSize, inclusive.
+
+
+EXAMPLES
+
+0)
+{10,20}
+10
+15
+
+Returns: 5
+
+We can move 5 students from the second time schedule to the first. Both schedules will then have a size of 15, which is the maximum allowed size.
+
+1)
+{20,8,6}
+10
+15
+
+Returns: 6
+
+We can move 2 students from the first schedule to the second, and another 4 students from the first schedule to the third.  The sizes of the resulting schedules will be 14, 10 and 10.
+
+2)
+{10,20,30}
+1
+18
+
+Returns: -1
+
+There is no solution possible here.  We have 60 students in 3 time schedules, so it is impossible to have at most 18 students per schedule.
+
+3)
+{50,10,20,20,5}
+15
+30
+
+Returns: 20
+
+
+
+4)
+{100,200,301}
+200
+200
+
+Returns: -1
+
+
+
+5)
+{1,10,10}	
+9
+20
+
+Returns: -1
+
+
+
+6)
+{55,33,45,71,27,89,16,14,61}
+33
+56
+
+Returns: 53
+
+
+
+7)
+{49,60,36,34,36,52,60,43,52,59}
+45
+51
+
+Returns: 31
+
+
+
+8)
+{5,5,5,5,5}
+5
+5
+
+Returns: 0
+
+

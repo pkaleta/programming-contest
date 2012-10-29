@@ -1,0 +1,102 @@
+PROBLEM STATEMENT
+You have an infinite number of the following two polyominoes:
+
+
+A  A
+AAAA
+
+
+and
+
+
+BB
+
+
+You are NOT allowed to rotate them.
+
+You are given a vector <string> region that represents a rectangular table filled with characters '.' and 'X'. The j-th character of the i-th element of region represents the cell at row i, column j of the table.
+
+You need to cover (without overlapping) all the 'X' characters with the given polyominoes. Return a vector <string> that contains the same area with cells marked '.' left untouched, and cells marked 'X' changed to 'A' or 'B', according to the polyomino that covers the cell.
+
+If there is no solution, return an empty vector <string>.
+
+If there are multiple solutions, return the one among them that comes first lexicographically. That is, you must minimize the first string, if there are still several solutions, minimize the second one, and so on.
+
+
+DEFINITION
+Class:SpecificPolyominoCovering
+Method:findCovering
+Parameters:vector <string>
+Returns:vector <string>
+Method signature:vector <string> findCovering(vector <string> region)
+
+
+NOTES
+-A string S is greater than a string T lexicographically if T is a proper prefix of S, or if S has a greater character at the first position where the strings differ.
+
+
+CONSTRAINTS
+-region will contain between 1 and 50 elements, inclusive.
+-Each element of region will contain between 1 and 50 characters, inclusive.
+-All elements of region will contain the same number of characters.
+-Each character in each element of region will be either '.' or uppercase 'X'.
+
+
+EXAMPLES
+
+0)
+{"XXXX",
+ "XXXX"}
+
+Returns: {"ABBA", "AAAA" }
+
+There are two possible coverings of the region:
+
+BBBB
+BBBB
+
+and
+
+ABBA
+AAAA
+
+
+The answer is the second covering since it is lexicographically smaller.
+
+1)
+{"X..XXXX..X",
+ "XXXX..XXXX"}
+
+Returns: {"A..ABBA..A", "AAAA..AAAA" }
+
+There's only one way to cover this region.
+
+2)
+{"XXXXXX",
+ "XXXXXX",
+ "XXXXXX"}
+
+Returns: {"ABBABB", "AAAABB", "BBBBBB" }
+
+There's only room for one A-polyomino, and it is optimal to place it in the upper left corner.
+
+3)
+{"X..XX",
+ "XXXXX"}
+
+Returns: { }
+
+The upper left 'X' must be covered with an A-polyomino (there is no room for a B-polyomino), but then there's no way to cover the rightmost cells.
+
+4)
+{"XXXXXXXXXX",
+ "XXXXXXXXXX",
+ "XXXXXXXXXX",
+ "XXXXX..XXX",
+ "XXXXXXXXXX",
+ "XXXXXXXXXX",
+ "XXXXXXXXXX"}
+
+Returns: {"ABBAABBABB", "AAAAAAAABB", "ABBABBBBBB", "AAAAA..ABB", "ABBAAAAABB", "AAAAABBABB", "BBBBAAAABB" }
+
+

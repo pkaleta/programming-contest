@@ -1,0 +1,42 @@
+PROBLEM STATEMENT
+A string of letters A, B, C is forbidden if there are three consecutive letters from which one is A, one is B, and one is C. For example, BAACAACCBAAA is forbidden, while AABBCCAABB is not.
+
+Your task is to calculate how many such strings of length n are not forbidden.
+
+
+DEFINITION
+Class:ForbiddenStrings
+Method:countNotForbidden
+Parameters:int
+Returns:long long
+Method signature:long long countNotForbidden(int n)
+
+
+CONSTRAINTS
+-n will be between 1 and 30, inclusive.
+
+
+EXAMPLES
+
+0)
+2
+
+Returns: 9
+
+All 9 strings of length 2 are not forbidden.
+
+
+1)
+3
+
+Returns: 21
+
+There are 27 strings of length 3. Of these, 6 contain one occurrence of each letter. Those 6 strings are forbidden, so you should return 21.
+
+
+2)
+4
+
+Returns: 51
+
+
