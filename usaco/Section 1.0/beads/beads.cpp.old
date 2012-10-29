@@ -1,0 +1,72 @@
+/*
+ID: piotrek4
+LANG: C
+TASK: beads
+*/
+
+#include <stdio.h>
+#include <string.h>
+#define MAX_LEN 355
+inline int lenL(int i, int j, int n)
+{
+    if (i > j)
+        return i-j;
+    if (i < j)
+        return i+(n-j);
+    return 1;
+}
+
+inline int lenR(int i, int j, int n)
+{
+    if (i < j)
+        return j-i;
+    if (i > j)
+        return j+(n-i);
+    return 1;
+}
+
+inline int max(int a, int b)
+{
+    return (a > b ? a : b);
+}
+
+int main ()
+{
+    FILE *fin  = fopen ("beads.in", "r");
+    FILE *fout = fopen ("beads.out", "w");
+    int m, i, j, n, tmp, next, prev;
+    char necklace[MAX_LEN], tmpNext;
+
+    fscanf(fin, "%d%s", &n, necklace);
+
+    i = 0;
+    m = 0;
+    while (i < n)
+    {
+        if (necklace[i] != 'w')
+        {
+            next = (i+1)%n;
+            prev = i;
+            while ((necklace[next] == necklace[i] || necklace[next] == 'w') && next != prev)
+            {
+                ++next;
+                if (next >= n)
+                    next = 0;
+            }
+
+            while ((necklace[prev] == necklace[i] || necklace[prev] == 'w') && prev != next)
+            {
+                --prev;
+                if (prev < 0)
+                    prev = n-1;
+            }
+            printf("start: %d, lewo: %d, prawo: %d     wynik: %d|%d\n", i, prev, next, lenL(i, prev, n), lenR(i+1, next, n));
+            m = max(m, lenL(i, prev, n)+lenR(i+1, next, n));
+        }
+        ++i;
+    }
+    printf("%d\n", m);
+    return 0;
+}
+
+
