@@ -49,18 +49,22 @@ void print(Rect* r) {
 }
 
 
-void insert(Rect* rect, vector<Rect*>& rects, set<string >& seen) {
-  ostringstream ss;
-  ss << rect->x1 << "*";
-  ss << rect->y1 << "*";
-  ss << rect->x2 << "*";
-  ss << rect->y2 << "*";
-  ss << rect->count;
-  string coord = ss.str();
-  if (seen.find(coord) == seen.end()) {
-    seen.insert(coord);
-    rects.push_back(rect);
+bool exist(Rect* rect, vector<Rect*>& rects) {
+  for (int i = 0; i < rects.size(); ++i) {
+    if (rects[i]->x1 == rect->x1 &&
+        rects[i]->y1 == rect->y1 &&
+        rects[i]->x2 == rect->x2 &&
+        rects[i]->y2 == rect->y2 &&
+        rects[i]->count == rect->count)
+      return true;
   }
+  return false;
+}
+
+
+void insert(Rect* rect, vector<Rect*>& rects) {
+  if (!exist(rect, rects))
+    rects.push_back(rect);
 }
 
 
@@ -70,30 +74,25 @@ int main() {
   vector<Rect*> rects;
 
   scanf("%d", &n);
-  scanf("%d%d%d%d", &x1, &y1, &x2, &y2);
-  Rect* r = new Rect(x1, y1, x2, y2, 1);
-  rects.push_back(r);
   vector<Rect*> tmp;
-  set<string > seen;
 
-  for (int i = 2; i <= n; ++i) {
+  for (int i = 1; i <= n; ++i) {
     Rect* rect;
     tmp.clear();
-    seen.clear();
 
     scanf("%d%d%d%d", &x1, &y1, &x2, &y2);
     rect = new Rect(x1, y1, x2, y2, 1);
 
     if (rect->count >= i - 1)
-      insert(rect, tmp, seen);
+      insert(rect, tmp);
 
     for (int j = 0; j < rects.size(); ++j) {
       if (rects[j]->count >= i - 1)
-        insert(rects[j], tmp, seen);
+        insert(rects[j], tmp);
 
       Rect* new_rect = intersect(rects[j], rect);
       if (new_rect && new_rect->count >= i - 1)
-        insert(new_rect, tmp, seen);
+        insert(new_rect, tmp);
     }
 
     rects = tmp;
@@ -103,7 +102,7 @@ int main() {
     // }
   }
 
-  // cout << "**********" << rects.size() << endl;
+  //cout << "**********" << rects.size() << endl;
 
   long long area = 0LL;
   int n_subsets = 1 << rects.size();
